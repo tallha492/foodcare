@@ -1,17 +1,16 @@
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
-import nodemailer from 'nodemailer'
+import nodemailer from "nodemailer";
 
 let transporter = nodemailer.createTransport({
-    host : process.env.EMAIL_HOST, //host
-    port : process.env.EMAIL_PORT, //port
-    secure : false, // true for 465 port else false
-    auth : {
-        user : process.env.EMAIL_USER, //your gmail ID
-        pass : process.env.EMAIL_PASS, //your gmail Password
-    }
-    
-})
+  host: "sandbox.smtp.mailtrap.io", //host
+  port: 2525, //port
+  secure: false, // true for 465 port else false
+  auth: {
+    user: "b787310f8d19d4",
+    pass: "ee581ace71e81e",
+  },
+});
 
-export default transporter
+export default transporter;
