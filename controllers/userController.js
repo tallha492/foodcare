@@ -7,7 +7,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import transporter from "../config/email.js";
 import geolib from 'geolib';
-import sequelize from 'sequelize';
 
 class UserController {
 
@@ -15,7 +14,7 @@ class UserController {
     //---------------------Auth Apis-----------------------------------------------
     static userRegistration = async (req, res) => {
 
-        const { fullName, username, email, password, location, latitude, longitude, type } = req.body
+        const { fullName, username, email, password, location, latitude, longitude, role } = req.body
 
 
         const userByEmail = await UserModel.findOne({ email: email });
@@ -27,7 +26,7 @@ class UserController {
             res.status(400).send({ status: "failed", message: "Username already exists" });
         }
         else {
-            if (fullName && username && email && password && location && type) {
+            if (fullName && username && email && password && location && role) {
                 try {
 
                     const salt = await bcrypt.genSalt(12)
@@ -46,7 +45,7 @@ class UserController {
                         location: location,
                         latitude: latitude,
                         longitude: longitude,
-                        type: type,
+                        role: role,
                         otp: otp,
                         expriration: otpExpiration,
 
